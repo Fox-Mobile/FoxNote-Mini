@@ -4,6 +4,6 @@ Version 1.0
 
 - [x] Add notes,
 - [ ] View notes,
-- [ ] save notes locally,
-- [ ] delete notes
-- [x] clean ui with fox branding
+- [ ] Save notes locally,
+- [ ] Delete notes
+- [x] Clean ui with fox branding
