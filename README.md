@@ -2,7 +2,7 @@
 
 Version 1.0
 
-- [ ] Add notes,
+- [x] Add notes,
 - [ ] View notes,
 - [ ] save notes locally,
 - [ ] delete notes
