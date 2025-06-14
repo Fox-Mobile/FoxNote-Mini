@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface NoteDao {
     @Upsert
-    fun upsertNote(note: Note)
+    suspend fun upsertNote(note: Note)
 
     @Delete
     suspend fun deleteNote(note: Note)

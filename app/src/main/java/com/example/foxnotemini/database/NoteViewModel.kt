@@ -2,6 +2,7 @@ package com.example.foxnotemini.database
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -10,12 +11,14 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalDateTime
+import javax.inject.Inject
 
-class NoteViewModel(
-    private val dao: NoteDao
+@HiltViewModel
+class NoteViewModel @Inject constructor(
+    private val noteDao: NoteDao
 ): ViewModel() {
     private val _state = MutableStateFlow(NoteState())
-    private val _notes = dao.getNotes()
+    private val _notes = noteDao.getNotes()
     val state = combine(_state, _notes) { state, notes ->
         state.copy(
             notes = notes
@@ -26,13 +29,13 @@ class NoteViewModel(
         when(event) {
             is NoteEvent.DeleteNote -> {
                 viewModelScope.launch {
-                    dao.deleteNote(event.note)
+                    noteDao.deleteNote(event.note)
                 }
             }
             NoteEvent.SaveNote -> {
                 val title = state.value.title
                 val content = state.value.content
-                val date = LocalDateTime.now().toString()
+                val date = LocalDate.now().toString()
 
                 val note = Note(
                     title = title,
@@ -41,7 +44,7 @@ class NoteViewModel(
                 )
 
                 viewModelScope.launch {
-                    dao.upsertNote(note)
+                    noteDao.upsertNote(note)
                 }
                 _state.update {
                     it.copy(
