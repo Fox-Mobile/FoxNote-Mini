@@ -6,9 +6,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.room.Room
+import com.example.foxnotemini.database.NoteDatabase
 
 
 class MainActivity : AppCompatActivity() {
+     val db by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            NoteDatabase::class.java,
+            "notes.db"
+        ).build()
+    }
     private val overviewFragment = OverviewFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
