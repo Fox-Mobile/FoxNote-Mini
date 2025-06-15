@@ -3,6 +3,7 @@
 Version 1.0
 
 - [x] Add notes,
+- [ ] Edit notes,
 - [ ] View notes,
 - [ ] Save notes locally,
 - [ ] Delete notes
