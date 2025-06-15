@@ -8,13 +8,13 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
-    @Upsert
+    @Upsert//TODO exclude date and title from upsert
     suspend fun upsertNote(note: Note)
 
     @Delete
     suspend fun deleteNote(note: Note)
 
     @Query("SELECT * FROM note ORDER BY date DESC")
-    fun getNotes(): Flow<List<Note>>
+    suspend fun getNotes(): List<Note>
 
 }

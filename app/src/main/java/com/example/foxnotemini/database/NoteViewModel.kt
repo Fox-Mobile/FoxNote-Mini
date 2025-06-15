@@ -3,6 +3,7 @@ package com.example.foxnotemini.database
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -18,12 +19,7 @@ class NoteViewModel @Inject constructor(
     private val noteDao: NoteDao
 ): ViewModel() {
     private val _state = MutableStateFlow(NoteState())
-    private val _notes = noteDao.getNotes()
-    val state = combine(_state, _notes) { state, notes ->
-        state.copy(
-            notes = notes
-        )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), NoteState())
+    val notes = viewModelScope.async {noteDao.getNotes()}
 
     fun OnEvent(event: NoteEvent){
         when(event) {
@@ -33,8 +29,8 @@ class NoteViewModel @Inject constructor(
                 }
             }
             NoteEvent.SaveNote -> {
-                val title = state.value.title
-                val content = state.value.content
+                val title = _state.value.title
+                val content = _state.value.content
                 val date = LocalDate.now().toString()
 
                 val note = Note(
