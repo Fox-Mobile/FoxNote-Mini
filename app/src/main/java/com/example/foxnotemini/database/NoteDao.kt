@@ -4,11 +4,10 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
-    @Upsert//TODO exclude date and title from upsert
+    @Upsert
     suspend fun upsertNote(note: Note)
 
     @Delete
