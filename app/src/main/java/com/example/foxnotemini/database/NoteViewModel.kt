@@ -29,11 +29,13 @@ class NoteViewModel @Inject constructor(
                 }
             }
             NoteEvent.SaveNote -> {
+                val id = _state.value.id
                 val title = _state.value.title
                 val content = _state.value.content
                 val date = LocalDate.now().toString()
 
                 val note = Note(
+                    id = id,
                     title = title,
                     content = content,
                     date = date
@@ -61,6 +63,14 @@ class NoteViewModel @Inject constructor(
                 _state.update {
                     it.copy(
                         title = event.title
+                    )
+                }
+            }
+
+            is NoteEvent.SetID -> {
+                _state.update {
+                    it.copy(
+                        id = event.id
                     )
                 }
             }

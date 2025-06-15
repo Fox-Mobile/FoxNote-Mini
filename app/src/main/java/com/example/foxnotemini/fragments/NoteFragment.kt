@@ -75,6 +75,7 @@ class NoteFragment : Fragment() {
                 }
             }
         } else {
+            noteIdFromArgs = null
             Log.d("NoteFragment", "Creating a new note.")
             Toast.makeText(
                 requireContext(),
@@ -89,6 +90,7 @@ class NoteFragment : Fragment() {
             if (binding.titleText.text.isNotEmpty() && binding.contentText.text.isNotEmpty()) {
                 noteViewModel.OnEvent(NoteEvent.SetTitle(binding.titleText.text.toString()))
                 noteViewModel.OnEvent(NoteEvent.SetContent(binding.contentText.text.toString()))
+                noteViewModel.OnEvent(NoteEvent.SetID(noteIdFromArgs))
                 noteViewModel.OnEvent(NoteEvent.SaveNote)
             }
 

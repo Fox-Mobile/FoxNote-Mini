@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foxnotemini.R
 import com.example.foxnotemini.activities.MainActivity
 import com.example.foxnotemini.adapters.RecyclerViewAdapter
@@ -40,7 +41,7 @@ class OverviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.noteList.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.noteList.layoutManager = LinearLayoutManager(requireContext())
 
         noteViewModel.viewModelScope.launch {
             var adapter: RecyclerViewAdapter
