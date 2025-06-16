@@ -33,12 +33,14 @@ class NoteViewModel @Inject constructor(
                 val title = _state.value.title
                 val content = _state.value.content
                 val date = LocalDate.now().toString()
+                val dateTime = LocalDateTime.now().toString()
 
                 val note = Note(
                     id = id,
                     title = title,
                     content = content,
-                    date = date
+                    date = date,
+                    dateTime = dateTime
                 )
 
                 viewModelScope.launch {

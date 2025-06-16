@@ -9,8 +9,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="412dp"
-        android:layout_height="49dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
     <EditText
         android:id="@+id/contentText"
         android:layout_width="match_parent"
-        android:layout_height="612dp"
+        android:layout_height="0dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"

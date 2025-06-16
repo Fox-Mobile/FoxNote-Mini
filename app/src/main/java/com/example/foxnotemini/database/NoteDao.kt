@@ -13,7 +13,7 @@ interface NoteDao {
     @Delete
     suspend fun deleteNote(note: Note)
 
-    @Query("SELECT * FROM note ORDER BY date DESC")
+    @Query("SELECT * FROM note ORDER BY dateTime DESC")
     suspend fun getNotes(): List<Note>
 
 }
