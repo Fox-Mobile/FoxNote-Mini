@@ -61,17 +61,8 @@ class NoteFragment : Fragment() {
                     note?.let { noteToLoad ->
                         binding.titleText.setText(noteToLoad.title)
                         binding.contentText.setText(noteToLoad.content)
-                    } ?: run {
-                        // Notatka o danym ID nie została znaleziona - mało prawdopodobne, ale możliwe
-                        Log.e("NoteFragment", "Note with ID $idToLoad not found!")
-                        Toast.makeText(
-                            requireContext(),
-                            "Error: Note not found.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        noteIdFromArgs = null
-                        binding.titleText.setText("")
-                        binding.contentText.setText("")
+
+                        Toast.makeText(requireContext(), "Info: Loading note.", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
