@@ -48,9 +48,11 @@ class NoteViewModel @Inject constructor(
                 }
                 _state.update {
                     it.copy(
+                        id = null,
                         title = "",
                         content = "",
-                        date = ""
+                        date = "",
+                        dateTime = ""
                     )
                 }
             }
