@@ -3,8 +3,8 @@
 Version 1.0
 
 - [x] Add notes,
-- [ ] Edit notes,
-- [ ] View notes,
-- [ ] Save notes locally,
+- [x] Edit notes,
+- [x] View notes,
+- [x] Save notes locally,
 - [ ] Delete notes
 - [x] Clean ui with fox branding
