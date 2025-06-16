@@ -69,6 +69,7 @@ class NoteFragment : Fragment() {
                             "Error: Note not found.",
                             Toast.LENGTH_SHORT
                         ).show()
+                        noteIdFromArgs = null
                         binding.titleText.setText("")
                         binding.contentText.setText("")
                     }
