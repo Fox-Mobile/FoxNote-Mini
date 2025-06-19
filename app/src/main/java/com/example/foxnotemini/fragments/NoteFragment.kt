@@ -56,14 +56,24 @@ class NoteFragment : Fragment() {
 
         if (noteIdFromArgs != null) {
             noteIdFromArgs?.let { idToLoad ->
-                val note = noteViewModel.notes.value.find { note -> note.id == idToLoad }
-                note?.let { noteToLoad ->
-                    binding.titleText.setText(noteToLoad.title)
-                    binding.contentText.setText(noteToLoad.content)
+                noteViewModel.viewModelScope.launch {
+                    val note = noteViewModel.notes.await().find { it.id == idToLoad }
+                    note?.let { noteToLoad ->
+                        binding.titleText.setText(noteToLoad.title)
+                        binding.contentText.setText(noteToLoad.content)
+
+                        Toast.makeText(requireContext(), "Info: Loading note.", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         } else {
             noteIdFromArgs = null
+            Log.d("NoteFragment", "Creating a new note.")
+            Toast.makeText(
+                requireContext(),
+                "Info: Creating a new note.",
+                Toast.LENGTH_SHORT
+            ).show()
             binding.titleText.setText("")
             binding.contentText.setText("")
         }

@@ -10,7 +10,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,13 +19,10 @@
         app:navigationIcon="@drawable/outline_arrow_back_ios_new_24"
         app:navigationIconTint="@color/orange"
         app:title="@string/app_name"
-        app:titleTextAppearance="@style/Toolbar.TitleText"
         app:titleTextColor="@color/orange" />
 
     <EditText
         android:id="@+id/contentText"
-        android:textSize="20sp"
-        android:text="@string/app_name"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:ems="10"
@@ -47,7 +44,7 @@
         android:inputType="textMultiLine"
         android:text="Title"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@id/contentText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

@@ -7,11 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.launch
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +15,6 @@ import com.example.foxnotemini.R
 import com.example.foxnotemini.activities.MainActivity
 import com.example.foxnotemini.adapters.RecyclerViewAdapter
 import com.example.foxnotemini.database.Note
-import com.example.foxnotemini.database.NoteEvent
 import com.example.foxnotemini.database.NoteViewModel
 import com.example.foxnotemini.databinding.FragmentOverviewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +30,6 @@ class OverviewFragment : Fragment() {
     private var _binding: FragmentOverviewBinding? = null
     private val binding get() = _binding!!
     private val noteViewModel by viewModels<NoteViewModel>()
-    private lateinit var adapter: RecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,14 +41,35 @@ class OverviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpRecyclerView()
+        binding.noteList.layoutManager = LinearLayoutManager(requireContext())
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                noteViewModel.notes.collect { notes: List<Note> ->
-                        adapter.updateData(notes)
-                }
+        noteViewModel.viewModelScope.launch {
+            var adapter: RecyclerViewAdapter
+            var notes: List<Note> = emptyList()
+            try {
+                notes = noteViewModel.notes.await()
+            } catch (e: Exception) {
+                var text = e.message
+                var duration = Toast.LENGTH_LONG
+                Toast.makeText(requireContext(), text, duration).show()
             }
+            adapter = RecyclerViewAdapter(
+                notes,
+                { clikedNote ->
+                    val newNoteFragment = NoteFragment()
+                    val args = Bundle().apply {
+                        if(clikedNote.id != null) {
+                            putInt("NOTE_ID", clikedNote.id)
+                        }
+                    }
+                    newNoteFragment.arguments = args
+                    requireActivity().supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.fragmentContainer, newNoteFragment)
+                        commitNow()
+                    }
+                }
+            )
+            binding.noteList.adapter = adapter
         }
 
         binding.addNoteButton.setOnClickListener {
@@ -69,34 +84,5 @@ class OverviewFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun setUpRecyclerView() {
-        adapter = RecyclerViewAdapter(
-            emptyList(),
-            { clickedNote ->
-                val newNoteFragment = NoteFragment()
-                val args = Bundle().apply {
-                    if (clickedNote.id != null) {
-                        putInt("NOTE_ID", clickedNote.id)
-                    }
-                }
-                newNoteFragment.arguments = args
-                requireActivity().supportFragmentManager.beginTransaction().apply {
-                    replace(R.id.fragmentContainer, newNoteFragment)
-                    commitNow()
-                }
-            },
-            { deletedNote ->
-                onDeleteNoteButtonClicked(deletedNote)
-            }
-        )
-
-        binding.noteList.adapter = adapter
-        binding.noteList.layoutManager = LinearLayoutManager(requireContext())
-    }
-
-    fun onDeleteNoteButtonClicked(note: Note) {
-        noteViewModel.OnEvent(NoteEvent.DeleteNote(note))
     }
 }
