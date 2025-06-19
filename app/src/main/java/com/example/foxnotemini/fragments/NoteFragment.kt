@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
  * create an instance of this fragment.
  */
 @AndroidEntryPoint
-class NoteFragment : Fragment() {
+class NoteFragment(private val note: Note? = null) : Fragment() {
     private var _binding: FragmentNoteBinding? = null
     private val binding get() = _binding!!
     private val noteViewModel by viewModels<NoteViewModel>()
@@ -42,37 +42,18 @@ class NoteFragment : Fragment() {
     ) {
         val overviewFragment = OverviewFragment()
         super.onViewCreated(view, savedInstanceState)
+        val noteId = note?.id
 
-        var noteIdFromArgs: Int? = null
-
-        arguments?.let { bundle ->
-            if (bundle.containsKey("NOTE_ID")) {
-                val id = bundle.getInt("NOTE_ID", -1)
-                if (id != -1) {
-                    noteIdFromArgs = id
-                }
-            }
-        }
-
-        if (noteIdFromArgs != null) {
-            noteIdFromArgs?.let { idToLoad ->
-                val note = noteViewModel.notes.value.find { note -> note.id == idToLoad }
-                note?.let { noteToLoad ->
-                    binding.titleText.setText(noteToLoad.title)
-                    binding.contentText.setText(noteToLoad.content)
-                }
-            }
-        } else {
-            noteIdFromArgs = null
-            binding.titleText.setText("")
-            binding.contentText.setText("")
+        if (note != null) {
+            binding.titleText.setText(note.title)
+            binding.contentText.setText(note.content)
         }
 
         binding.toolbar.setNavigationOnClickListener {
             if (binding.titleText.text.isNotEmpty() && binding.contentText.text.isNotEmpty()) {
                 noteViewModel.OnEvent(NoteEvent.SetTitle(binding.titleText.text.toString()))
                 noteViewModel.OnEvent(NoteEvent.SetContent(binding.contentText.text.toString()))
-                noteViewModel.OnEvent(NoteEvent.SetID(noteIdFromArgs))
+                noteViewModel.OnEvent(NoteEvent.SetID(noteId))
                 noteViewModel.OnEvent(NoteEvent.SaveNote)
             }
 

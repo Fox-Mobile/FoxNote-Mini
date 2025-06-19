@@ -75,13 +75,7 @@ class OverviewFragment : Fragment() {
         adapter = RecyclerViewAdapter(
             emptyList(),
             { clickedNote ->
-                val newNoteFragment = NoteFragment()
-                val args = Bundle().apply {
-                    if (clickedNote.id != null) {
-                        putInt("NOTE_ID", clickedNote.id)
-                    }
-                }
-                newNoteFragment.arguments = args
+                val newNoteFragment = NoteFragment(clickedNote)
                 requireActivity().supportFragmentManager.beginTransaction().apply {
                     replace(R.id.fragmentContainer, newNoteFragment)
                     commitNow()
