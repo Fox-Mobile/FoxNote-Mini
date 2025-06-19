@@ -3,18 +3,24 @@ package com.example.foxnotemini.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foxnotemini.R
 import com.example.foxnotemini.database.Note
+import com.example.foxnotemini.database.NoteViewModel
+import com.example.foxnotemini.fragments.OverviewFragment
+import kotlinx.coroutines.flow.Flow
 import kotlin.collections.addAll
 import kotlin.text.clear
 
 class RecyclerViewAdapter(
     private var notes: List<Note>,
-    private val onClickedNote: (note: Note) -> Unit
+    private val onClickedNote: (note: Note) -> Unit,
+    private val onDeleteNoteButtonClicked: (note: Note) -> Unit
 ) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
-
     class ViewHolder(View: View) : RecyclerView.ViewHolder(View) {
         val title: TextView
         val date: TextView
@@ -39,6 +45,10 @@ class RecyclerViewAdapter(
         holder.itemView.setOnClickListener {
             onClickedNote(notes[position])
         }
+
+        holder.itemView.findViewById<ImageButton>(R.id.deleteButton).setOnClickListener {
+            onDeleteNoteButtonClicked(notes[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -46,8 +56,7 @@ class RecyclerViewAdapter(
     }
 
     fun updateData(newNotes: List<Note>) {
-        notes = newNotes
+        this.notes = newNotes
         notifyDataSetChanged()
     }
-
 }
