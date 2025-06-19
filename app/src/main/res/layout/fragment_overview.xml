@@ -15,6 +15,7 @@
         app:title="@string/app_name"
         app:titleCentered="true"
         app:titleTextColor="@color/orange"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
         app:navigationIconTint="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,8 +23,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/noteList"
-        android:layout_width="411dp"
-        android:layout_height="666dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

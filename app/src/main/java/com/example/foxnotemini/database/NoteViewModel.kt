@@ -6,6 +6,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -19,7 +21,7 @@ class NoteViewModel @Inject constructor(
     private val noteDao: NoteDao
 ): ViewModel() {
     private val _state = MutableStateFlow(NoteState())
-    val notes = viewModelScope.async {noteDao.getNotes()}
+    val notes: StateFlow<List<Note>> = noteDao.getNotes().stateIn(scope = viewModelScope, started = SharingStarted.WhileSubscribed(), emptyList())
 
     fun OnEvent(event: NoteEvent){
         when(event) {
