@@ -1,22 +1,16 @@
 package com.example.foxnotemini.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.result.launch
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foxnotemini.R
-import com.example.foxnotemini.activities.MainActivity
 import com.example.foxnotemini.adapters.RecyclerViewAdapter
 import com.example.foxnotemini.database.Note
 import com.example.foxnotemini.database.NoteEvent
@@ -25,11 +19,6 @@ import com.example.foxnotemini.databinding.FragmentOverviewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-/**
- * A simple [Fragment] subclass.
- * Use the [OverviewFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 @AndroidEntryPoint
 class OverviewFragment : Fragment() {
     private var _binding: FragmentOverviewBinding? = null
@@ -71,7 +60,7 @@ class OverviewFragment : Fragment() {
         _binding = null
     }
 
-    fun setUpRecyclerView() {
+    private fun setUpRecyclerView() {
         adapter = RecyclerViewAdapter(
             emptyList(),
             { clickedNote ->
@@ -90,7 +79,7 @@ class OverviewFragment : Fragment() {
         binding.noteList.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    fun onDeleteNoteButtonClicked(note: Note) {
-        noteViewModel.OnEvent(NoteEvent.DeleteNote(note))
+    private fun onDeleteNoteButtonClicked(note: Note) {
+        noteViewModel.onEvent(NoteEvent.DeleteNote(note))
     }
 }

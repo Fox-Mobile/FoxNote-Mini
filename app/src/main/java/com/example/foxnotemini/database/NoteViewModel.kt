@@ -3,12 +3,9 @@ package com.example.foxnotemini.database
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -23,7 +20,7 @@ class NoteViewModel @Inject constructor(
     private val _state = MutableStateFlow(NoteState())
     val notes: StateFlow<List<Note>> = noteDao.getNotes().stateIn(scope = viewModelScope, started = SharingStarted.WhileSubscribed(), emptyList())
 
-    fun OnEvent(event: NoteEvent){
+    fun onEvent(event: NoteEvent){
         when(event) {
             is NoteEvent.DeleteNote -> {
                 viewModelScope.launch {
