@@ -5,7 +5,7 @@
 I believe that if you use simpler apps your life gets easier. That's why I decided to create this app.This app is as simple as it can be.
 
 For more information:
-- See this presentation: 
+- See this presentation: https://docs.google.com/presentation/d/1REdxXmY0Ck_AyEEEL254dteW8KOAJIh9KWSJ5LrtQDU/edit?usp=sharing
 - And watch this video:
 
 It has only the most basic features like:
