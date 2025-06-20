@@ -27,8 +27,8 @@ Why is FoxNote Mini better?
 - FoxNote Mini has potential to convert into a big project.
 
 If you are already using FoxNote Mini please take some time and do this things:
-- Give me your feedback at: 
-- Make a feature request for FoxNote at:
+- Give me your feedback at: https://docs.google.com/forms/d/e/1FAIpQLScA1Yc0LSrsZnQqgPCWWqcdRYJvBYfc4G0HCdxRYdQdIU2GvA/viewform?usp=header
+- Make a feature request for FoxNote at: https://docs.google.com/forms/d/e/1FAIpQLSd5tZjqeB21jxskTn0mdRvwhINmU6HY1RutZybCp9GH1mAPQQ/viewform?usp=header
 
 If you want to see FoxNote Mini in action watch:
 
