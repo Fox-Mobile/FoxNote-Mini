@@ -31,15 +31,16 @@ class NoteFragment(private val note: Note? = null) : Fragment() {
         view: View,
         savedInstanceState: Bundle?
     ) {
-        val overviewFragment = OverviewFragment()
         super.onViewCreated(view, savedInstanceState)
         val noteId = note?.id
 
-        if (note != null) {
-            binding.titleText.setText(note.title)
-            binding.contentText.setText(note.content)
-        }
+        setUpFragment()
 
+        setUpListeners(noteId)
+    }
+
+    private fun setUpListeners(noteId: Int?) {
+        val overviewFragment = OverviewFragment()
         binding.toolbar.setNavigationOnClickListener {
             if (binding.titleText.text.isNotEmpty() && binding.contentText.text.isNotEmpty()) {
                 noteViewModel.onEvent(NoteEvent.SetTitle(binding.titleText.text.toString()))
@@ -52,6 +53,13 @@ class NoteFragment(private val note: Note? = null) : Fragment() {
                 replace(R.id.fragmentContainer, overviewFragment)
                 commitNow()
             }
+        }
+    }
+
+    private fun setUpFragment() {
+        if (note != null) {
+            binding.titleText.setText(note.title)
+            binding.contentText.setText(note.content)
         }
     }
 

@@ -36,28 +36,12 @@ class OverviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setUpRecyclerView()
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                noteViewModel.notes.collect { notes: List<Note> ->
-                        adapter.updateData(notes)
-                }
-            }
-        }
+        observeNotes()
 
-        binding.addNoteButton.setOnClickListener {
-            val newNoteFragment = NoteFragment()
-            requireActivity().supportFragmentManager.beginTransaction().apply {
-                replace(R.id.fragmentContainer, newNoteFragment)
-                commitNow()
-            }
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        setUpListeners()
     }
 
     private fun setUpRecyclerView() {
@@ -81,5 +65,30 @@ class OverviewFragment : Fragment() {
 
     private fun onDeleteNoteButtonClicked(note: Note) {
         noteViewModel.onEvent(NoteEvent.DeleteNote(note))
+    }
+
+    private fun observeNotes() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                noteViewModel.notes.collect { notes: List<Note> ->
+                    adapter.updateData(notes)
+                }
+            }
+        }
+    }
+
+    private fun setUpListeners() {
+        binding.addNoteButton.setOnClickListener {
+            val newNoteFragment = NoteFragment()
+            requireActivity().supportFragmentManager.beginTransaction().apply {
+                replace(R.id.fragmentContainer, newNoteFragment)
+                commitNow()
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
