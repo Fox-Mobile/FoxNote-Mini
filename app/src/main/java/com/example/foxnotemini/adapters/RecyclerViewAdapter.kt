@@ -3,31 +3,24 @@ package com.example.foxnotemini.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foxnotemini.R
 import com.example.foxnotemini.database.Note
-import com.example.foxnotemini.database.NoteViewModel
-import com.example.foxnotemini.fragments.OverviewFragment
-import kotlinx.coroutines.flow.Flow
-import kotlin.collections.addAll
-import kotlin.text.clear
 
 class RecyclerViewAdapter(
     private var notes: List<Note>,
     private val onClickedNote: (note: Note) -> Unit,
     private val onDeleteNoteButtonClicked: (note: Note) -> Unit
 ) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
-    class ViewHolder(View: View) : RecyclerView.ViewHolder(View) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView
         val date: TextView
 
         init {
-            title = View.findViewById(R.id.titleView)
-            date = View.findViewById(R.id.dateView)
+            title = view.findViewById(R.id.titleView)
+            date = view.findViewById(R.id.dateView)
         }
     }
 
