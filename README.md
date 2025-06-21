@@ -29,7 +29,7 @@ If you are already using FoxNote Mini please take some time and do this things:
 - Give me your feedback at: https://docs.google.com/forms/d/e/1FAIpQLScA1Yc0LSrsZnQqgPCWWqcdRYJvBYfc4G0HCdxRYdQdIU2GvA/viewform?usp=header
 - Make a feature request for FoxNote at: https://docs.google.com/forms/d/e/1FAIpQLSd5tZjqeB21jxskTn0mdRvwhINmU6HY1RutZybCp9GH1mAPQQ/viewform?usp=header
 
-If you want to see FoxNote Mini in action watch:
+If you want to see FoxNote Mini in action watch: https://youtube.com/shorts/XzsFS0lI028
 
 ## How to install FoxNoteMini:
 1. Download the latest version of FoxNoteMini to your device from github releases or use this link: ,
@@ -41,7 +41,7 @@ If you want to see FoxNote Mini in action watch:
 7. This time you should be able to install the .apk file,
 8. Hit the install button
 9. And everything is set now.
-But if you still have trouble installing FoxNoteMini watch this video:
+But if you still have trouble installing FoxNoteMini watch this video: https://youtube.com/shorts/56e7cdk2UAU
 
 ## Find a bug:
 If you find a bug please open an issue and try to describe your problem as details as possible.
