@@ -6,7 +6,6 @@ I believe that if you use simpler apps your life gets easier. That's why I decid
 
 For more information:
 - See this presentation: https://docs.google.com/presentation/d/1REdxXmY0Ck_AyEEEL254dteW8KOAJIh9KWSJ5LrtQDU/edit?usp=sharing
-- And watch this video:
 
 It has only the most basic features like:
 - [x] adding notes,
