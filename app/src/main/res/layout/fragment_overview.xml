@@ -33,13 +33,14 @@
 
     <Button
         android:id="@+id/addNoteButton"
-        android:layout_width="75dp"
+        android:layout_width="70dp"
         android:layout_height="75dp"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/orange"
         android:text="+"
-        android:textSize="44sp"
+        android:textColor="@color/white"
+        android:textSize="41sp"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
