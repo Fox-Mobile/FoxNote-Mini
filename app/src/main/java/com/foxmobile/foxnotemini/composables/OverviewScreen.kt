@@ -1,47 +1,52 @@
 package com.foxmobile.foxnotemini.composables
 
-import com.foxmobile.foxnotemini.ui.theme.FoxNoteMiniTheme
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.foxmobile.foxnotemini.database.Note
+import com.foxmobile.foxnotemini.database.NoteViewModel
+import com.foxmobile.foxnotemini.ui.theme.FoxNoteMiniTheme
+import org.koin.androidx.compose.getViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OverviewScreen(
-    onNoteClick: (/* TODO Note*/) -> Unit,
-    onAddButtonClick: () -> Unit
+    onNoteClick: (Note) -> Unit, onAddButtonClick: () -> Unit, noteViewModel: NoteViewModel
 ) {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val uiState by noteViewModel.state.collectAsState()
+
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = Modifier.fillMaxSize(),
 
         topBar = {
-            CenterAlignedTopAppBar(
+            TopAppBar(
                 title = {
-                    Text("FoxNote Mini", fontSize = 35.sp)
+                    Text(
+                        text = "FoxNote Mini",
+                        fontSize = 35.sp,
+                    )
 
                 },
-                scrollBehavior = scrollBehavior
+                modifier = Modifier.wrapContentHeight(),
             )
         },
 
@@ -49,10 +54,13 @@ fun OverviewScreen(
             FloatingActionButton(
                 onClick = {
                     onAddButtonClick()
-                },
-                modifier = Modifier.size(60.dp)
+                }, modifier = Modifier.size(60.dp)
             ) {
-                Icon(imageVector = Icons.Rounded.Add, contentDescription = "Add note", Modifier.size(55.dp))
+                Icon(
+                    imageVector = Icons.Rounded.Add,
+                    contentDescription = "Add note",
+                    Modifier.size(55.dp)
+                )
             }
         }
 
@@ -62,18 +70,17 @@ fun OverviewScreen(
             contentPadding = padding,
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp)
-        ){
-            for (i  in 1..10) {
+        ) {
+            uiState.notes.forEach { note ->
                 item {
                     Box(
                         modifier = Modifier
                             .fillParentMaxWidth()
                             .clickable {
-                                onNoteClick(/* TODO Note(i, "title $i", "content $i", LocalDate.now().toString(), LocalDateTime.now().toString())*/)
-                            }
-                    ) {
+                                onNoteClick(note)
+                            }) {
                         NoteContainer(
-                            /* TODO note = Note(i, "title $i", "content $i", LocalDate.now().toString(), LocalDateTime.now().toString()),*/
+                            note = note, noteViewModel = getViewModel<NoteViewModel>()
                         )
                     }
                 }
@@ -86,6 +93,6 @@ fun OverviewScreen(
 @Composable
 fun PreviewOverviewScreen(modifier: Modifier = Modifier) {
     FoxNoteMiniTheme {
-        OverviewScreen(onNoteClick = {}, onAddButtonClick = {})
+        OverviewScreen(onNoteClick = {}, onAddButtonClick = {}, noteViewModel = getViewModel())
     }
 }

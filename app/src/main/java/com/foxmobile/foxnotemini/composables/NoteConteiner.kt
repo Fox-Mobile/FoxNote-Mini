@@ -25,10 +25,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.foxmobile.foxnotemini.database.Note
+import com.foxmobile.foxnotemini.database.NoteEvent
+import com.foxmobile.foxnotemini.database.NoteViewModel
 import com.foxmobile.foxnotemini.ui.theme.FoxNoteMiniTheme
+import org.koin.androidx.compose.getViewModel
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Composable
-fun NoteContainer(modifier: Modifier = Modifier, /* TODO note: Note*/) {
+fun NoteContainer(
+    modifier: Modifier = Modifier,
+    note: Note,
+    noteViewModel: NoteViewModel
+) {
 
     Surface(
         modifier = modifier,
@@ -49,8 +59,7 @@ fun NoteContainer(modifier: Modifier = Modifier, /* TODO note: Note*/) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     content = {
                         Text(
-//                            TODO note.title
-                            "Note",
+                            note.title,
                             color = MaterialTheme.colorScheme.primary,
                             fontSize = 25.sp,
                             textAlign = TextAlign.Center,
@@ -58,22 +67,22 @@ fun NoteContainer(modifier: Modifier = Modifier, /* TODO note: Note*/) {
                         )
 
                         Text(
-//                           TODO note.date,
-                            "02.02.2025",
+                            note.date,
                             color = MaterialTheme.colorScheme.primary,
                             fontSize = 20.sp,
                             textAlign = TextAlign.End,
                             modifier = Modifier.fillMaxWidth()
                         )
-                    }
-                )
+                    })
                 IconButton(
                     modifier = Modifier
                         .padding(4.dp)
                         .align(Alignment.CenterVertically)
                         .background(MaterialTheme.colorScheme.background),
 
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                        noteViewModel.onEvent(NoteEvent.DeleteNote(note))
+                    }
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.Delete,
@@ -91,6 +100,16 @@ fun NoteContainer(modifier: Modifier = Modifier, /* TODO note: Note*/) {
 @Composable
 fun PreviewNoteContainer(modifier: Modifier = Modifier) {
     FoxNoteMiniTheme {
-        NoteContainer(modifier = modifier, /* TODO note = Note(1, "Note", "Content", LocalDate.now().toString(), LocalDateTime.now().toString())*/)
+        NoteContainer(
+            modifier = modifier,
+            note = Note(
+                1,
+                "Note",
+                "Content",
+                LocalDate.now().toString(),
+                LocalDateTime.now().toString()
+            ),
+            noteViewModel = getViewModel()
+        )
     }
 }

@@ -1,5 +1,7 @@
 package com.foxmobile.foxnotemini.database
 
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,8 +13,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-//TODO @HiltViewModel
-class NoteViewModel /*TODO @Inject*/ constructor(
+class NoteViewModel(
     private val noteDao: NoteDao
 ): ViewModel() {
     private val _state = MutableStateFlow(NoteState())
