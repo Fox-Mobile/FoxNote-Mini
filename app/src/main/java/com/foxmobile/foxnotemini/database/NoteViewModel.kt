@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -15,9 +16,10 @@ import java.time.LocalDateTime
 
 class NoteViewModel(
     private val noteDao: NoteDao
-): ViewModel() {
+) : ViewModel() {
     private val _state = MutableStateFlow(NoteState())
     private val _notes = noteDao.getAll()
+
     val state = combine(_state, _notes) { state, notes ->
         state.copy(
             notes = notes
@@ -26,12 +28,13 @@ class NoteViewModel(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), NoteState())
 
     fun onEvent(event: NoteEvent) {
-        when(event){
+        when (event) {
             is NoteEvent.DeleteNote -> {
                 viewModelScope.launch {
                     noteDao.deleteNote(event.note)
                 }
             }
+
             NoteEvent.SaveNote -> {
                 val id = _state.value.id
                 val title = _state.value.title
@@ -40,11 +43,7 @@ class NoteViewModel(
                 val dateTime = LocalDateTime.now().toString()
 
                 val note = Note(
-                    id = id,
-                    title = title,
-                    content = content,
-                    date = date,
-                    dateTime = dateTime
+                    id = id, title = title, content = content, date = date, dateTime = dateTime
                 )
 
                 viewModelScope.launch {
@@ -53,19 +52,17 @@ class NoteViewModel(
 
                 _state.update {
                     it.copy(
-                        id = null,
-                        title = "",
-                        content = "",
-                        date = "",
-                        dateTime = ""
+                        id = null, title = "", content = "", date = "", dateTime = ""
                     )
                 }
             }
+
             is NoteEvent.SetContent -> {
                 _state.value = _state.value.copy(
                     content = event.content
                 )
             }
+
             is NoteEvent.SetID -> {
                 _state.update {
                     it.copy(
@@ -73,6 +70,7 @@ class NoteViewModel(
                     )
                 }
             }
+
             is NoteEvent.SetTitle -> {
                 _state.value = _state.value.copy(
                     title = event.title

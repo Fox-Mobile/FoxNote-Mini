@@ -1,9 +1,8 @@
 package com.foxmobile.foxnotemini.composables
 
-import android.content.Context
 import android.widget.Toast
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,7 +26,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -50,6 +48,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.input.pointer.pointerInput
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,13 +59,12 @@ fun NoteScreen(
 ) {
     val onBackArrowClick = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
 
-    var note = noteParam ?: Note(null, "", "", "", "")
-
-    val uiState = noteViewModel.state.collectAsState()
+    val note = noteParam ?: Note(null, "", "", "", "")
 
     val context = LocalContext.current
     var title by remember(note.id) { mutableStateOf(note.title) }
     var content by remember(note.id) { mutableStateOf(note.content) }
+    var isNoteSaved by  remember { mutableStateOf(false) }
 
     Scaffold (
         topBar = {
@@ -95,9 +93,9 @@ fun NoteScreen(
                             noteViewModel.onEvent(NoteEvent.SetTitle(title))
                             noteViewModel.onEvent(NoteEvent.SetContent(content))
                             if(content.isNotEmpty() && title.isNotEmpty()){
-                                val savedNoteId = noteViewModel.onEvent(NoteEvent.SaveNote)
-                                Toast.makeText(context, "Saving Note...", Toast.LENGTH_SHORT).show()
-
+                                noteViewModel.onEvent(NoteEvent.SaveNote)
+                                isNoteSaved = true
+                                Toast.makeText(context, "Saving... To edit: view list first.", Toast.LENGTH_LONG).show()
                             }else Toast.makeText(context, "Can't save note - both fields are empty", Toast.LENGTH_SHORT).show()
                         }
                     ) {
@@ -121,6 +119,7 @@ fun NoteScreen(
             verticalArrangement = Arrangement.Top,
         ){
             TextField(
+                readOnly = isNoteSaved,
                 value = title,
                 onValueChange = {newTitle ->
                     title = newTitle
@@ -128,6 +127,7 @@ fun NoteScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .wrapContentHeight(),
+
                 textStyle = TextStyle(
                     fontSize = 28.sp
                 ),
@@ -150,14 +150,14 @@ fun NoteScreen(
                         Icon(
                             imageVector = Icons.Default.Info,
                             contentDescription = "Hint",
-                            tint = Color.Gray, // Kolor ikony
-                            modifier = Modifier.size(20.dp) // Dostosuj rozmiar ikony
+                            tint = Color.Gray,
+                            modifier = Modifier.size(20.dp)
                         )
                         Spacer(Modifier.width(4.dp))
                         Text(
                             text = "Title",
                             fontSize = 28.sp,
-                            color = Color.Gray, // Kolor tekstu placeholdera
+                            color = Color.Gray,
                             fontStyle = FontStyle.Italic
                         )
                     }
@@ -165,6 +165,7 @@ fun NoteScreen(
             )
             Spacer(modifier = modifier.padding(2.dp))
             TextField(
+                readOnly = isNoteSaved,
                 value = content,
                 onValueChange = {newContent ->
                     content = newContent
@@ -195,14 +196,14 @@ fun NoteScreen(
                         Icon(
                             imageVector = Icons.Default.Info,
                             contentDescription = "Hint",
-                            tint = Color.Gray, // Kolor ikony
-                            modifier = Modifier.size(20.dp) // Dostosuj rozmiar ikony
+                            tint = Color.Gray,
+                            modifier = Modifier.size(20.dp)
                         )
                         Spacer(Modifier.width(4.dp))
                         Text(
                             text = "Content",
                             fontSize = 28.sp,
-                            color = Color.Gray, // Kolor tekstu placeholdera
+                            color = Color.Gray,
                             fontStyle = FontStyle.Italic
                         )
                     }
