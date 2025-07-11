@@ -200,7 +200,7 @@ fun NoteScreen(
                         Spacer(Modifier.width(4.dp))
                         Text(
                             text = "Content",
-                            fontSize = 28.sp,
+                            fontSize = 22.sp,
                             color = Color.Gray,
                             fontStyle = FontStyle.Italic
                         )
