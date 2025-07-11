@@ -30,8 +30,9 @@ If you are already using FoxNote Mini please take some time and do this things:
 - Make a feature request for FoxNote at: https://docs.google.com/forms/d/e/1FAIpQLSd5tZjqeB21jxskTn0mdRvwhINmU6HY1RutZybCp9GH1mAPQQ/viewform?usp=header
 
 ### FoxNote Mini in action:
-<img width="432" height="906" alt="Screenshot from 2025-07-11 14-50-26" src="https://github.com/user-attachments/assets/f4c7f774-4eb2-44e7-bc40-b613429510f0" />
-<img width="432" height="906" alt="Screenshot from 2025-07-11 14-50-31" src="https://github.com/user-attachments/assets/26187bb9-bebe-47d5-aad1-ef887d4baf3b" />
+<img width="432" height="906" alt="Delete note" src="https://github.com/user-attachments/assets/31acf54e-babb-4f4a-b4ac-d7f71725e640" />
+<img width="432" height="906" alt="save note" src="https://github.com/user-attachments/assets/b0296c8d-f463-49c4-86dd-bd805b2b800d" />
+
 
 
 ### How to install FoxNoteMini:
