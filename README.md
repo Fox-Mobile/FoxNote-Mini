@@ -4,7 +4,7 @@
 
 I believe that if you use simpler apps your life gets easier. That's why I decided to create this app.This app is as simple as it can be.
 
-For more information:
+### For more information:
 - See this presentation: https://docs.google.com/presentation/d/1REdxXmY0Ck_AyEEEL254dteW8KOAJIh9KWSJ5LrtQDU/edit?usp=sharing
 
 It has only the most basic features like:
@@ -14,7 +14,7 @@ It has only the most basic features like:
 - [x] deleting notes,
 - [x] displaying notes in a list.
 
-Why is FoxNote Mini better?
+### Why is FoxNote Mini better?
 - It is simpler, 
 - Not bloated with unnecessary functions, 
 - If you want more functions you can choose Fox Note (need to wait more), 
@@ -29,9 +29,12 @@ If you are already using FoxNote Mini please take some time and do this things:
 - Give me your feedback at: https://docs.google.com/forms/d/e/1FAIpQLScA1Yc0LSrsZnQqgPCWWqcdRYJvBYfc4G0HCdxRYdQdIU2GvA/viewform?usp=header
 - Make a feature request for FoxNote at: https://docs.google.com/forms/d/e/1FAIpQLSd5tZjqeB21jxskTn0mdRvwhINmU6HY1RutZybCp9GH1mAPQQ/viewform?usp=header
 
-If you want to see FoxNote Mini version 1.0.0 in action watch: https://youtube.com/shorts/XzsFS0lI028
+### FoxNote Mini in action:
+<img width="432" height="906" alt="Screenshot from 2025-07-11 14-50-26" src="https://github.com/user-attachments/assets/f4c7f774-4eb2-44e7-bc40-b613429510f0" />
+<img width="432" height="906" alt="Screenshot from 2025-07-11 14-50-31" src="https://github.com/user-attachments/assets/26187bb9-bebe-47d5-aad1-ef887d4baf3b" />
 
-## How to install FoxNoteMini:
+
+### How to install FoxNoteMini:
 1. Download the latest version of FoxNoteMini to your device from github releases or use this link: ,
 2. Got to files and downloads on your device,
 3. Click on the .apk file that you just download,
@@ -43,10 +46,10 @@ If you want to see FoxNote Mini version 1.0.0 in action watch: https://youtube.c
 9. And everything is set now.
 But if you still have trouble installing FoxNoteMini watch this video: https://youtube.com/shorts/56e7cdk2UAU
 
-## Find a bug:
+### Find a bug?:
 If you find a bug please open an issue and try to describe your problem as details as possible.
 
-## Notice
+### Notice
 Icons used in this app are from Material Design Icons and Material Desing Symbols by Google.
         Copyright Google LLC.
         These icons are licensed under the Apache License, Version 2.0 (the "License");
