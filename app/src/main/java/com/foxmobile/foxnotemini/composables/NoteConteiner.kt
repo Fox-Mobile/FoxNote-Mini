@@ -59,7 +59,7 @@ fun NoteContainer(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     content = {
                         Text(
-                            note.title,
+                            note.title.ifEmpty { "Untitled" },
                             color = MaterialTheme.colorScheme.primary,
                             fontSize = 25.sp,
                             textAlign = TextAlign.Center,
