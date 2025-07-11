@@ -99,7 +99,7 @@ fun NoteScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Check,
-                            contentDescription = "Back",
+                            contentDescription = "Save note",
                             tint = Orange,
                             modifier = modifier.size(39.dp)
                         )
