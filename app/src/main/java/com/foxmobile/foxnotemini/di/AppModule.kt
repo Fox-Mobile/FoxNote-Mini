@@ -19,7 +19,7 @@ val appModule = module {
     single<NoteDao> {
         get<NoteDatabase>().dao
     }
-    viewModel(){
+    viewModel {
         NoteViewModel(get())
     }
 }
