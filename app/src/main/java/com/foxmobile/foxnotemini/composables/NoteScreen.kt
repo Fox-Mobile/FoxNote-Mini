@@ -90,7 +90,7 @@ fun NoteScreen(
                             noteViewModel.onEvent(NoteEvent.SetID(note.id))
                             noteViewModel.onEvent(NoteEvent.SetTitle(title))
                             noteViewModel.onEvent(NoteEvent.SetContent(content))
-                            if(content.isNotEmpty() && title.isNotEmpty()){
+                            if(content.isNotEmpty() || title.isNotEmpty()){
                                 noteViewModel.onEvent(NoteEvent.SaveNote)
                                 isNoteSaved = true
                                 Toast.makeText(context, "Saving... To edit: view list first.", Toast.LENGTH_LONG).show()
