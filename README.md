@@ -29,7 +29,7 @@ If you are already using FoxNote Mini please take some time and do this things:
 - Give me your feedback at: https://docs.google.com/forms/d/e/1FAIpQLScA1Yc0LSrsZnQqgPCWWqcdRYJvBYfc4G0HCdxRYdQdIU2GvA/viewform?usp=header
 - Make a feature request for FoxNote at: https://docs.google.com/forms/d/e/1FAIpQLSd5tZjqeB21jxskTn0mdRvwhINmU6HY1RutZybCp9GH1mAPQQ/viewform?usp=header
 
-If you want to see FoxNote Mini in action watch: https://youtube.com/shorts/XzsFS0lI028
+If you want to see FoxNote Mini version 1.0.0 in action watch: https://youtube.com/shorts/XzsFS0lI028
 
 ## How to install FoxNoteMini:
 1. Download the latest version of FoxNoteMini to your device from github releases or use this link: ,
